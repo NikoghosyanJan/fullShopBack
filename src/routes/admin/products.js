@@ -42,6 +42,9 @@ router.post('/add-product', upload.single('image'), async (req, res) => {
         )
 
         const products = await Product.find({})
+        products.forEach(el => {
+            el.image = "https://fullshop-back.herokuapp.com" + el.image
+        })
         res.send(products)
 
     } catch (e) {
@@ -193,6 +196,9 @@ router.get('/get-all-products', async (req, res) => {
         if (!products) {
             return res.status(400).json({message: "No data"})
         }
+        products.forEach(el => {
+            el.image = process.env.API_URL + el.image
+        })
         res.send(products)
 
     } catch (e) {
