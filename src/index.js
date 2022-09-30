@@ -11,7 +11,11 @@ import cron from "node-cron";
 import {checkUnusedCarts} from "./helper.js";
 import * as dotenv from "dotenv";
 import cors from "cors";
-import * as path from "path";
+import path, {dirname} from "path";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename)
 
 dotenv.config();
 
