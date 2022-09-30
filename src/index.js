@@ -9,6 +9,9 @@ import productRouterAdmin from "./routes/admin/products.js";
 import CartRouter from "./routes/api/cart.js";
 import cron from "node-cron";
 import {checkUnusedCarts} from "./helper.js";
+import dotenv from "nodemon";
+
+dotenv.config();
 
 //   --->   IT WILL WORK EVERY MONTH    <---
 // cron.schedule('0 0 0 1 */1 *', checkUnusedCarts);
@@ -16,15 +19,15 @@ import {checkUnusedCarts} from "./helper.js";
 cron.schedule('0 0 */1 * * *', checkUnusedCarts);
 
 const app = express();
-// app.use("/uploads", express.static('uploads'));
-// app.use(express.json());
-// app.use('/api/auth',authRouter);
-// app.use('/api/products', productRouter);
-// app.use('/api/categories', categoryRouter);
-// app.use('/api/cart', CartRouter);
-//
-// app.use('/admin/categories', categoryRouterAdmin);
-// app.use('/admin/products', productRouterAdmin);
+app.use("/uploads", express.static('uploads'));
+app.use(express.json());
+app.use('/api/auth',authRouter);
+app.use('/api/products', productRouter);
+app.use('/api/categories', categoryRouter);
+app.use('/api/cart', CartRouter);
+
+app.use('/admin/categories', categoryRouterAdmin);
+app.use('/admin/products', productRouterAdmin);
 
 
 (async function start(){
@@ -40,4 +43,4 @@ const app = express();
     }
 })()
 
-app.listen(8000);
+app.listen(process.env.PORT);
