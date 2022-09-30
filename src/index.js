@@ -16,15 +16,15 @@ import {checkUnusedCarts} from "./helper.js";
 cron.schedule('0 0 */1 * * *', checkUnusedCarts);
 
 const app = express();
-app.use("/uploads", express.static('uploads'));
-app.use(express.json());
-app.use('/api/auth',authRouter);
-app.use('/api/products', productRouter);
-app.use('/api/categories', categoryRouter);
-app.use('/api/cart', CartRouter);
-
-app.use('/admin/categories', categoryRouterAdmin);
-app.use('/admin/products', productRouterAdmin);
+// app.use("/uploads", express.static('uploads'));
+// app.use(express.json());
+// app.use('/api/auth',authRouter);
+// app.use('/api/products', productRouter);
+// app.use('/api/categories', categoryRouter);
+// app.use('/api/cart', CartRouter);
+//
+// app.use('/admin/categories', categoryRouterAdmin);
+// app.use('/admin/products', productRouterAdmin);
 
 
 (async function start(){
