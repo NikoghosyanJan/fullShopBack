@@ -39,19 +39,6 @@ router.get('/get-products-by-category', async (req, res) => {
     }
 });
 
-router.get('/get-all-products', async (req, res) => {
-    try {
-        const products = await Product.find({});
-        if (!products) {
-            return res.status(400).json({message: "No data"})
-        }
-        res.send(products)
-
-    } catch (e) {
-        res.status(500).json({message: "Something went wrong!"})
-    }
-});
-
 router.get('/get-product-details', async (req, res) => {
     try {
         const {url} = req.query;
