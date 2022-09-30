@@ -11,6 +11,7 @@ import cron from "node-cron";
 import {checkUnusedCarts} from "./helper.js";
 import * as dotenv from "dotenv";
 import cors from "cors";
+import * as path from "path";
 
 dotenv.config();
 
@@ -34,7 +35,7 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions))
 
-app.use("/uploads", express.static('uploads'));
+app.use("/uploads", express.static(path.join(process.cwd(), 'uploads')));
 app.use(express.json());
 app.use('/api/auth',authRouter);
 app.use('/api/products', productRouter);

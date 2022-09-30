@@ -46,7 +46,6 @@ router.get('/get-product-details', async (req, res) => {
         if (!product) {
             return res.status(400).json({message: "No data"})
         }
-        ;
         res.send(product)
 
     } catch (e) {
