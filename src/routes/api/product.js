@@ -32,6 +32,9 @@ router.get('/get-products-by-category', async (req, res) => {
         }
         const productsByCategory = await Product.find({_id: IDs})
 
+        productsByCategory.forEach(el => {
+            el.image = process.env.API_URL + el.image
+        })
         res.send(productsByCategory)
 
     } catch (e) {
@@ -46,6 +49,7 @@ router.get('/get-product-details', async (req, res) => {
         if (!product) {
             return res.status(400).json({message: "No data"})
         }
+        product.image = process.env.API_URL + product.image
         res.send(product)
 
     } catch (e) {

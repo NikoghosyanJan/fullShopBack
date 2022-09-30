@@ -27,8 +27,6 @@ router.post('/add-product', upload.single('image'), async (req, res) => {
         })
         await product.save()
 
-        console.log(req.body, "___body")
-
         const category_id = req.body.category_id
         const category = await Category.findOne({_id: ObjectId(category_id)});
         category.productIDs.push(product._id)
@@ -136,6 +134,9 @@ router.post('/edit-product', upload.single('image'), async (req, res) => {
         await Cart.insertMany(
             carts
         );
+        EditedProducts.forEach(el => {
+            el.image = "https://fullshop-back.herokuapp.com" + el.image
+        })
 
         return res.send(EditedProducts);
     } catch (e) {
