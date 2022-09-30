@@ -37,10 +37,10 @@ app.use('/admin/products', productRouterAdmin);
             useUnifiedTopology: true,
             serverApi: ServerApiVersion.v1
         })
+        app.listen(process.env.PORT || 5000);
     }catch (e) {
         console.log("server Error", e.message)
         process.exit(1)
     }
 })()
 
-app.listen(process.env.PORT || 5000);
