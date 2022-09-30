@@ -27,6 +27,9 @@ router.post('/get-cart', async (req, res) => {
                     {token: auth},
                     {updated_at: date}
                 )
+                cart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(cart)
             }
         } else if (req.body.cartID) {
@@ -40,6 +43,9 @@ router.post('/get-cart', async (req, res) => {
                 {_id: cartID},
                 {updated_at: date}
             )
+            cart.items.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(cart)
         }
     } catch (e) {
@@ -81,6 +87,9 @@ router.post('/add-to-cart', async (req, res) => {
                     updated_at: new Date()
                 })
                 await newCart.save()
+                newCart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(newCart)
             } else {
                 // ---> the case of CART WAS FOUNT <---
@@ -107,6 +116,7 @@ router.post('/add-to-cart', async (req, res) => {
                         }
                     );
                     const newUpdatedCart = await Cart.findOne({_id: cartID})
+
                     res.send(newUpdatedCart)
                 } else {
                     // ---> the case of ADD NEW PRODUCT to cart <---
@@ -120,6 +130,9 @@ router.post('/add-to-cart', async (req, res) => {
                         }
                     );
                     const newUpdatedCart = await Cart.findOne({_id: cartID})
+                    newUpdatedCart.items.forEach(el => {
+                        el.image = process.env.API_URL + el.image
+                    })
                     res.send(newUpdatedCart)
                 }
             }
@@ -137,6 +150,9 @@ router.post('/add-to-cart', async (req, res) => {
                     updated_at: new Date()
                 })
                 await newCart.save()
+                newCart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(newCart)
             } else {
                 // ---> the case of CART WAS FOUNT <---
@@ -164,6 +180,9 @@ router.post('/add-to-cart', async (req, res) => {
                         }
                     );
                     const newUpdatedCart = await Cart.findOne({_id: cartID})
+                    newUpdatedCart.items.forEach(el => {
+                        el.image = process.env.API_URL + el.image
+                    })
                     res.send(newUpdatedCart)
                 } else {
                     // <--- the case of ADD NEW PRODUCT to cart <---
@@ -180,6 +199,9 @@ router.post('/add-to-cart', async (req, res) => {
                         }
                     );
                     const newUpdatedCart = await Cart.findOne({_id: cartID})
+                    newUpdatedCart.items.forEach(el => {
+                        el.image = process.env.API_URL + el.image
+                    })
                     res.send(newUpdatedCart)
                 }
             }
@@ -192,6 +214,9 @@ router.post('/add-to-cart', async (req, res) => {
                 updated_at: new Date()
             })
             await newCart.save()
+            newCart.items.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(newCart)
         }
 
@@ -226,6 +251,9 @@ router.post('/delete-from-cart', async (req, res) => {
             )
 
             const newUpdatedCart = await Cart.findOne({_id: cartID})
+            newUpdatedCart.items.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(newUpdatedCart)
         } else if (cartID) {
             const cart = await Cart.findOne({_id: cartID})
@@ -244,6 +272,9 @@ router.post('/delete-from-cart', async (req, res) => {
             )
 
             const newUpdatedCart = await Cart.findOne({_id: cartID})
+            newUpdatedCart.items.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(newUpdatedCart)
         }
     } catch (e) {
@@ -283,6 +314,9 @@ router.post('/edit-cart', async (req, res) => {
             )
 
             const newUpdatedCart = await Cart.findOne({_id: cartID})
+            newUpdatedCart.items.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(newUpdatedCart)
         } else if (cartID) {
             const cart = await Cart.findOne({_id: cartID})
@@ -307,6 +341,9 @@ router.post('/edit-cart', async (req, res) => {
             )
 
             const newUpdatedCart = await Cart.findOne({_id: cartID})
+            newUpdatedCart.items.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(newUpdatedCart)
         }
     } catch (e) {

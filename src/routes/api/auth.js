@@ -66,6 +66,7 @@ router.post('/login', async (req, res) => {
             $set: {token}
         });
 
+        res.cookie("token", token)
         res.json({
             token,
             name: user.name,
@@ -91,7 +92,7 @@ router.post('/logout', async (req, res) => {
         await User.updateOne({token: serchToken}, {
             $set: {token: ""}
         });
-
+        res.clearCookie("token")
         res.json({status: true, message: "User was successfuly log outed!"})
 
     } catch (e) {
