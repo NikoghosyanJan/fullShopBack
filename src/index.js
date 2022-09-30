@@ -9,7 +9,7 @@ import productRouterAdmin from "./routes/admin/products.js";
 import CartRouter from "./routes/api/cart.js";
 import cron from "node-cron";
 import {checkUnusedCarts} from "./helper.js";
-import dotenv from "nodemon";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
