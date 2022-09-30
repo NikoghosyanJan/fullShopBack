@@ -32,11 +32,11 @@ app.use('/admin/products', productRouterAdmin);
 
 (async function start(){
     try {
-        // await mongoose.connect("mongodb+srv://Zhan:1111@cluster0.aryldzn.mongodb.net/?retryWrites=true&w=majority", {
-        //     useNewUrlParser: true,
-        //     useUnifiedTopology: true,
-        //     serverApi: ServerApiVersion.v1
-        // })
+        await mongoose.connect("mongodb+srv://Zhan:1111@cluster0.aryldzn.mongodb.net/?retryWrites=true&w=majority", {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverApi: ServerApiVersion.v1
+        })
         app.listen(process.env.PORT || 5000);
     }catch (e) {
         console.log("server Error", e.message)
