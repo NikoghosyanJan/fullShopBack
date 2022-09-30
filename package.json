@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon src/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "node build"
+    "dev": "nodemon src/index.js"
   },
   "author": "Zhan Nikoghosyan",
   "license": "ISC",
