@@ -19,7 +19,7 @@ dotenv.config();
 //  ---> BUT AT THIS TIME I NEED TO USE THIS EVERY HOUR  <---
 // cron.schedule('0 0 */1 * * *', checkUnusedCarts);
 
-const whitelist = ["https://fullshop.pages.dev"]
+const whitelist = ["https://fullshop.pages.dev", "http://localhost:3000"]
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || whitelist.indexOf(origin) !== -1) {
