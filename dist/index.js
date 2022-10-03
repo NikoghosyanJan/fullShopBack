@@ -13,6 +13,7 @@ const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const mongodb_1 = require("mongodb");
 const products_1 = require("./Routes/admin/products");
 const categories_1 = require("./Routes/admin/categories");
@@ -20,12 +21,23 @@ const products_2 = require("./Routes/api/products");
 const categories_2 = require("./Routes/api/categories");
 const auth_1 = require("./Routes/api/auth");
 const cart_1 = require("./Routes/api/cart");
-const node_cron_1 = require("node-cron");
+const whitelist = ["https://fullshop.pages.dev", "http://localhost:3000"];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
+};
 dotenv.config();
 const app = express();
 app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
-console.log(node_cron_1.default, "cron");
+app.use(cors(corsOptions));
 app.use('/api/products', products_2.default);
 app.use('/api/categories', categories_2.default);
 app.use('/api/auth', auth_1.default);

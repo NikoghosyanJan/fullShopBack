@@ -29,13 +29,9 @@ dotenv.config();
 const app = express();
 app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
-
-
 app.use(cors(corsOptions))
 
 
-
-console.log(cron, "cron")
 // cron.schedule('* * * * *', checkUnusedCarts);
 
 app.use('/api/products', productRouter);

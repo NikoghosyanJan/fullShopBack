@@ -21,6 +21,9 @@ class AdminProductsController {
                 if (!products) {
                     return res.status(400).json({ message: "No data" });
                 }
+                products.forEach(el => {
+                    el.image = process.env.API_URL + el.image;
+                });
                 res.send(products);
             }
             catch (e) {
