@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 
 const {Schema, model} = mongoose;
 
@@ -6,8 +6,9 @@ const schema = new Schema({
     items: {type: Array},
     userID: {type: String},
     total: {type: Number},
-    updated_at: {type: String}
-});
+    createdAd: {type: String || Date},
+    updatedAt: {type: String || Date}
+}, { timestamps: true });
 
 const Cart = model("CART", schema);
 

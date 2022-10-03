@@ -1,5 +1,4 @@
-import mongoose from 'mongoose';
-
+import * as mongoose from "mongoose";
 const {Schema, model} = mongoose;
 
 const schema = new Schema({
@@ -9,7 +8,7 @@ const schema = new Schema({
     quantity: {type: String, required: true},
     price: {type: String, required: true},
     sale_price: {type: String},
-    image: { type: Object },
+    image: { type: String },
     url: {type: String, unique: true}
 });
 

@@ -1,6 +1,6 @@
-import Cart from "./models/Cart.js";
+import Cart from "./models/Cart";
 
-export function convertSubCategories(data) {
+export function convertSubCategories(data): any[] {
     const result = [];
     data.forEach((el, i) => {
         if (!el.parent) {
@@ -36,13 +36,13 @@ export function calculateCartTotal(cart) {
 }
 
 export async function checkUnusedCarts () {
-    console.log("check Carts_________________________", currentDate)
-
     const carts = await Cart.find({userID: null});
     const cartsForDelete = [];
 
+    console.log(carts, "carts ")
+
     carts.forEach(cart => {
-        const cartDate = new Date(cart.updated_at);
+        const cartDate = new Date(cart.updatedAt);
         const currentDate = new Date();
         const time = cartDate.getTime();
         const currentTime = currentDate.getTime();
