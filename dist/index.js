@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -35,7 +34,7 @@ const corsOptions = {
 };
 dotenv.config();
 const app = express();
-app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static('uploads'));
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use('/api/products', products_2.default);

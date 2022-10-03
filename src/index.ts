@@ -13,6 +13,8 @@ import cartRouter from "./Routes/api/cart";
 import cron from "node-cron";
 import {checkUnusedCarts} from "./helpers";
 
+// cron.schedule('* * * * *', checkUnusedCarts);
+
 const whitelist = ["https://fullshop.pages.dev", "http://localhost:3000", "", "/"]
 const corsOptions = {
     origin: function (origin, callback) {
@@ -27,19 +29,14 @@ const corsOptions = {
 
 dotenv.config();
 const app = express();
-app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static('uploads'));
 app.use(express.json());
-app.use(cors(corsOptions))
-
-
-// cron.schedule('* * * * *', checkUnusedCarts);
+app.use(cors(corsOptions));
 
 app.use('/api/products', productRouter);
 app.use('/api/categories', categoriesReducer);
 app.use('/api/auth', authRouter);
 app.use('/api/cart', cartRouter);
-
-
 
 app.use('/admin/products', productRouterAdmin);
 app.use('/admin/categories', categoriesRouterAdmin);
