@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -20,7 +21,7 @@ const products_2 = require("./Routes/api/products");
 const categories_2 = require("./Routes/api/categories");
 const auth_1 = require("./Routes/api/auth");
 const cart_1 = require("./Routes/api/cart");
-const whitelist = ["https://fullshop.pages.dev", "http://localhost:3000"];
+const whitelist = ["https://fullshop.pages.dev", "http://localhost:3000", "", "/"];
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || whitelist.indexOf(origin) !== -1) {
@@ -34,7 +35,7 @@ const corsOptions = {
 };
 dotenv.config();
 const app = express();
-app.use("/uploads", express.static(__dirname + '/uploads'));
+app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use('/api/products', products_2.default);
