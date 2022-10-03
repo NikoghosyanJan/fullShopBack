@@ -2,6 +2,7 @@ import * as path from "path";
 import * as express from "express";
 import * as dotenv from "dotenv";
 import * as mongoose from "mongoose";
+import * as cors from "cors";
 import {ServerApiVersion} from "mongodb";
 import productRouterAdmin from "./Routes/admin/products";
 import categoriesRouterAdmin from "./Routes/admin/categories";
@@ -12,10 +13,25 @@ import cartRouter from "./Routes/api/cart";
 import cron from "node-cron";
 import {checkUnusedCarts} from "./helpers";
 
+const whitelist = ["https://fullshop.pages.dev", "http://localhost:3000"]
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error("Not allowed by CORS"))
+        }
+    },
+    credentials: true,
+}
+
 dotenv.config();
 const app = express();
 app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
+
+
+app.use(cors(corsOptions))
 
 
 
