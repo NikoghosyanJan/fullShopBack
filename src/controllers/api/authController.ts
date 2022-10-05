@@ -74,6 +74,7 @@ class AuthController {
                 name: user.name,
                 phone_number: user.phone_number,
                 email: user.email,
+                token,
                 status: true
             })
 
