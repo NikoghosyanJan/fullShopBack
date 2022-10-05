@@ -54,6 +54,9 @@ class AdminProductsController {
             )
 
             const products = await Product.find({})
+            products.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(products)
 
         } catch (e) {
@@ -148,6 +151,9 @@ class AdminProductsController {
                 carts
             );
 
+            EditedProducts.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             return res.send(EditedProducts);
         } catch (e) {
             res.status(500).json({message: "Something went wrong!"})
@@ -195,6 +201,9 @@ class AdminProductsController {
                 carts
             );
 
+            products.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(products);
         } catch (e) {
             res.status(500).json({message: "Something went wrong!"})

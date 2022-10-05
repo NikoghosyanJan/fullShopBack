@@ -41,6 +41,9 @@ class CartController {
                     await Cart.updateOne(
                         {token: auth}
                     )
+                    cart.items.forEach(el => {
+                        el.image = process.env.API_URL + el.image
+                    })
                     res.send(cart)
                 }
             } else if (req.body.cartID) {
@@ -92,6 +95,9 @@ class CartController {
                     total: (sale_price || price) * qtt
                 })
                 await newCart.save()
+                newCart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(newCart)
             } else {
                 // ---> the case of CART WAS FOUNT <---
@@ -116,6 +122,9 @@ class CartController {
                         }
                     );
                     const newUpdatedCart = await Cart.findOne({_id: cartID})
+                    newUpdatedCart.items.forEach(el => {
+                        el.image = process.env.API_URL + el.image
+                    })
                     res.send(newUpdatedCart)
                 } else {
                     // ---> the case of ADD NEW PRODUCT to cart <---
@@ -128,6 +137,9 @@ class CartController {
                         }
                     );
                     const newUpdatedCart = await Cart.findOne({_id: cartID})
+                    newUpdatedCart.items.forEach(el => {
+                        el.image = process.env.API_URL + el.image
+                    })
                     res.send(newUpdatedCart)
                 }
             }
@@ -167,6 +179,9 @@ class CartController {
                 )
 
                 const newUpdatedCart = await Cart.findOne({_id: cartID})
+                newUpdatedCart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(newUpdatedCart)
             } else if (cartID) {
                 const cart = await Cart.findOne({_id: cartID})
@@ -190,6 +205,9 @@ class CartController {
                 )
 
                 const newUpdatedCart = await Cart.findOne({_id: cartID})
+                newUpdatedCart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(newUpdatedCart)
             }
         } catch (e) {
@@ -221,6 +239,9 @@ class CartController {
                 )
 
                 const newUpdatedCart = await Cart.findOne({_id: cartID})
+                newUpdatedCart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(newUpdatedCart)
             } else if (cartID) {
                 const cart = await Cart.findOne({_id: cartID})
@@ -238,6 +259,9 @@ class CartController {
                 )
 
                 const newUpdatedCart = await Cart.findOne({_id: cartID})
+                newUpdatedCart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(newUpdatedCart)
             }
         } catch (e) {

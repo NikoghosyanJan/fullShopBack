@@ -17,7 +17,9 @@ class ProductsController {
                 })
             }
             const productsByCategory = await Product.find({_id: IDs})
-
+            productsByCategory.forEach(el => {
+                el.image = process.env.API_URL + el.image
+            })
             res.send(productsByCategory)
 
         } catch (e) {
@@ -32,7 +34,8 @@ class ProductsController {
             if (!product) {
                 return res.status(400).json({message: "No data"})
             }
-            ;
+
+            product.image = process.env.API_URL + product.image
             res.send(product)
 
         } catch (e) {
