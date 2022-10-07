@@ -42,7 +42,12 @@ class CartController {
                         {token: auth}
                     )
                     cart.items.forEach(el => {
-                        el.image = process.env.API_URL + el.image
+                        el.image = process.env.API_URL + el.image;
+                        if (user.wishList.includes(el._id.toString())){
+                            el.isWished = true
+                        }else{
+                            el.isWished = false
+                        }
                     })
                     res.send(cart)
                 }
@@ -52,10 +57,13 @@ class CartController {
                     res.send({})
                 }
                 calculateCartTotal(cart)
+                cart.items.forEach(el => {
+                    el.image = process.env.API_URL + el.image
+                })
                 res.send(cart)
             }
         } catch (e) {
-            res.status(500).json({message: "Something went wrong! 😟"})
+            res.status(500).json({message: "Something went wrong! 😟", error: e})
         }
     }
 

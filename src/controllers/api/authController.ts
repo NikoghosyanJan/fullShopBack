@@ -1,6 +1,9 @@
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import User from "../../models/User";
+import {ObjectId} from "mongodb";
+import Product from "../../models/Product";
+import product from "../../models/Product";
 
 interface RegErrors {
     email?: String,
@@ -120,6 +123,57 @@ class AuthController {
                 email: user.email,
                 status: true
             })
+        } catch (e) {
+            res.status(500).json({message: "Something went wrong!"})
+        }
+    }
+
+    async addToWishList(req, res) {
+        try {
+            const _id = req.body._id;
+            const user = await User.findOne({token: req.headers.authorization});
+
+            if (!user) {
+                return res.status(400).json({message: "try again"})
+            }
+
+
+            const index =  user.wishList.indexOf(_id);
+
+            if(index > -1){
+                user.wishList.splice(index, 1)
+            }else {
+                user.wishList.push(_id)
+            }
+
+
+            await User.updateOne(
+                {token: req.headers.authorization},
+                {$set: user}
+            )
+            res.send({success: true})
+
+
+        } catch (e) {
+            res.status(500).json({message: "Something went wrong!"})
+        }
+    }
+
+    async getWishList(req, res) {
+        try {
+            const user = await User.findOne({token: req.headers.authorization});
+
+            if (!user) {
+                return res.status(400).json({message: "try again"})
+            }
+
+            const products = await Product.find({_id: user.wishList})
+            products.forEach(el => {
+                el.image = process.env.API_URL + el.image;
+                el.isWished = true;
+            })
+            res.send(products)
+
         } catch (e) {
             res.status(500).json({message: "Something went wrong!"})
         }

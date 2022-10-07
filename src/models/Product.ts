@@ -9,7 +9,8 @@ const schema = new Schema({
     price: {type: String, required: true},
     sale_price: {type: String},
     image: { type: String },
-    url: {type: String, unique: true}
+    url: {type: String, unique: true},
+    isWished: {type: Boolean}
 });
 
 const Product = model("PRODUCT", schema);

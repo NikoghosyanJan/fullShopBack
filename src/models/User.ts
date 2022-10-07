@@ -7,7 +7,8 @@ const schema = new Schema({
     phone_number: {type: String, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    token: {type: String}
+    token: {type: String},
+    wishList: {type: Array || Object}
 });
 
 const User = model("User", schema)

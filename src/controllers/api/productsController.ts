@@ -1,5 +1,6 @@
 import Product from "../../models/Product";
 import Category from "../../models/Category";
+import User from "../../models/User";
 
 class ProductsController {
 
@@ -31,11 +32,17 @@ class ProductsController {
         try {
             const {url} = req.query;
             const product = await Product.findOne({url});
+            const auth = req.headers.authorization;
+            const user = auth && await User.findOne({token: auth});
+
             if (!product) {
                 return res.status(400).json({message: "No data"})
             }
 
-            product.image = process.env.API_URL + product.image
+            product.image = process.env.API_URL + product.image;
+            if(user && user.wishList.includes(product._id.toString())){
+                product.isWished = true
+            }
             res.send(product)
 
         } catch (e) {
