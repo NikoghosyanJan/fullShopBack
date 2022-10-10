@@ -50,6 +50,29 @@ class ProductsController {
         }
     }
 
+    async searchProducts(req, res) {
+        try {
+            const {search:value} = req.query;
+            const including = [];
+
+
+            const products = await Product.find();
+            products.forEach(el => {
+                console.log(el.title.includes(value), "bool")
+                if (el.title.includes(value) || el.description.includes(value)){
+                    el.image = process.env.API_URL + el.image;
+                    including.push(el)
+                }
+            });
+
+
+            res.send(including)
+
+        } catch (e) {
+            res.status(500).json({message: "Something went wrong!"})
+        }
+    }
+
 }
 
 export default new ProductsController()
