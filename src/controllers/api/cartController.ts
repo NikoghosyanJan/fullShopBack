@@ -85,13 +85,14 @@ class CartController {
                 })
                 if (!user) {
                     res.status(403).json({error: "the user not found"})
+                }else{
+                    cart = await Cart.findOne({
+                        userID: user._id
+                    })
                 }
-                cart = await Cart.findOne({
-                    userID: user._id
-                })
             } else if (req.body.cartID) {
                 cart = await Cart.findOne({_id: cartID})
-                if (cart.userID) {
+                if (cart?.userID) {
                     res.send({})
                 }
             }
