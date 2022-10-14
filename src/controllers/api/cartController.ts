@@ -92,9 +92,7 @@ class CartController {
                 }
             } else if (req.body.cartID) {
                 cart = await Cart.findOne({_id: cartID})
-                if (cart?.userID) {
-                    res.send({})
-                }
+                res.send(cart)
             }
             if (!cart) {
                 //  ---> the case ofCART NOT FOUND,  and  create new cart <---
